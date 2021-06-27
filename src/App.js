@@ -1,25 +1,47 @@
-import logo from './logo.svg';
-import './App.css';
+import Header from './components/Header';
+import {useState, Fragment} from 'react';
+import Footer from './components/Footer';
+import Producto from './components/Producto';
+import Changuito from "./components/Changuito"
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    const [productos, guardarProductos] = useState([
+        {id:1, articulo:"Guitarra criolla", precio:125000},
+        {id:2, articulo:"Guitarra electrica", precio:72500},
+        {id:3, articulo:"Bajo", precio:215000},
+        {id:4, articulo:"Bateria", precio:125000},
+        {id:5, articulo:"Mic", precio:58000},
+    ]);
+    
+    const [changuito, setChanguito] = useState([]);
+    
+    return(
+        <Fragment>
+            <Header/>
+            <h1>Instrumentos Musicales SA - Compre online</h1>
+            {productos.map(producto =>
+                (
+                    <Producto
+                        key={producto.id}
+                        producto = {producto}
+                        productos = {productos}
+                        changuito = {changuito}
+                        setChanguito = {setChanguito}
+                    />
+                )
+                )}
+
+            <Changuito
+                changuito = {changuito}
+                setChanguito = {setChanguito}
+            />            
+
+            <Footer
+             anio={"2021"}
+             />
+        </Fragment>
+    );
 }
 
 export default App;
+
